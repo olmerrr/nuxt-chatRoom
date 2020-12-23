@@ -52,6 +52,9 @@
 
 export default {
   layout: "empty",
+  head: {
+    title: 'Welcome to chatRoom'
+  },
    data: () => ({
       valid: true,
       name: '',

@@ -5,7 +5,9 @@
  
 <script>
   import {mapState} from 'vuex';
+
   export default {
+    middleware: ["chat"],
     computed: mapState(['user']),
   };
 </script>
