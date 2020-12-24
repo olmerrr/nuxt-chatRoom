@@ -1,21 +1,27 @@
 <template>
-  <v-card-text>
-    <h2>Chat Page {{user.name}}</h2>
-    <p>Your Room is: {{user.room}}</p>
-  </v-card-text>
+  <div>
+    <v-card-text>
+        <ul>
+          <li v-for="message in messages" 
+            :key="message.text">
+            {{message.text}}
+          </li>
+        </ul>
+      </v-card-text>
+   </div>
 </template>
 
  
 <script>
-  import {mapState} from 'vuex';
+import { mapState } from "vuex";
 
-  export default {
-    middleware: ["chat"],
-    head() {
-      return {
-        title: `Room ${this.user.room}`
-      };
-    },
-    computed: mapState(['user']),
-  };
+export default {
+  middleware: ["chat"],
+  head() {
+    return {
+      title: `Room ${this.user.room}`,
+    };
+  },
+  computed: mapState(["user", "messages"]),
+};
 </script>

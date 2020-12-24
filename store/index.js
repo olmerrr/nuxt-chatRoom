@@ -1,5 +1,6 @@
 export const state = () => ({
-  user: {}
+  user: {},
+  messages: []
 }); 
 
 export const mutations = {
@@ -7,11 +8,11 @@ export const mutations = {
     state.user = user;
   },
   clearData(state) {
-    state.user = {}
+    state.user = {},
+    state.messages = []
+
   },
-};
-export const actions = {
-  SOCKET_newMessage(ctx, data) {
-      console.log('Message received', data)
+  SOCKET_newMessage(state, message){
+    state.messages.push(message);
   },
 };
