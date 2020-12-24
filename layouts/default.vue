@@ -3,13 +3,13 @@
     <v-navigation-drawer app v-model="drawer">
       <v-list subheader>
         <v-subheader>People's List:</v-subheader>
-        <v-list-tile v-for="u in users" :key="u.id" @click.prevent>
+        <v-list-tile v-for="user in users" :key="user.id" @click.prevent>
           <v-list-tile-content>
-            <v-list-tile-title>{{ u.name }}</v-list-tile-title>
+            <v-list-tile-title>{{ user.name }}</v-list-tile-title>
           </v-list-tile-content>
 
           <v-list-tile-action>
-            <v-icon :color="u.id === 2 ? 'primary' : 'grey'"
+            <v-icon :color="user.id === 2 ? 'primary' : 'grey'"
               >chat_bubble</v-icon
             >
           </v-list-tile-action>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   data() {
@@ -46,7 +46,11 @@ export default {
   },
   computed: mapState(["user"]),
   methods: {
-    exit() {},
+    ...mapMutations(['clearData']),
+    exit() {
+      this.$router.push('/?message=leftChat')
+      this.clearData();
+    },
   },
 };
 </script>
