@@ -23,8 +23,8 @@
       </v-btn>
       <v-toolbar-title>Chat Room {{ user.room }}</v-toolbar-title>
     </v-toolbar>
-    <v-content  class="content-wrapp">
-      <div>
+    <v-content>
+      <div class="content-wrapp-item">
         <nuxt />
       </div>
     </v-content>
@@ -55,7 +55,7 @@ export default {
 };
 </script>
 <style scoped>
-  .content-wrapp {
+  .content-wrapp-item {
     height: 100%;
   }
 </style>
