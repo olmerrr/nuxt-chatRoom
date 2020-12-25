@@ -3,7 +3,7 @@
     <v-flex xs12 sm8>
       <v-card min-width="360">
         <v-card-title><h2>Nuxt chatRoom</h2></v-card-title>
-        <v-card-text>
+        <v-card-text v-on:keyup.enter="submit">
           <v-form ref="form" v-model="valid" lazy-validation>
             <v-text-field
               v-model="name"
@@ -63,6 +63,9 @@ export default {
     },
   },
   methods: {
+    enter() {
+      console.log('enter')
+    },
     ...mapMutations(["setUser"]),
     submit() {
       this.$refs.form.validate();
