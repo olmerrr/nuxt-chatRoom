@@ -3,13 +3,13 @@
     <v-navigation-drawer app v-model="drawer" mobile-break-point="650">
       <v-list subheader>
         <v-subheader>People's List:</v-subheader>
-        <v-list-tile v-for="user in users" :key="user.id" @click.prevent>
+        <v-list-tile v-for="u in users" :key="u.id" @click.prevent>
           <v-list-tile-content>
-            <v-list-tile-title>{{ user.name }}</v-list-tile-title>
+            <v-list-tile-title>{{ u.name }}</v-list-tile-title>
           </v-list-tile-content>
 
           <v-list-tile-action>
-            <v-icon :color="user.id === 2 ? 'primary' : 'grey'"
+            <v-icon :color="u.id === user.id ? 'primary' : 'grey'"
               >chat_bubble</v-icon
             >
           </v-list-tile-action>
@@ -38,24 +38,22 @@ export default {
   data() {
     return {
       drawer: true,
-      users: [
-        { id: 1, name: "User 1" },
-        { id: 2, name: "User 2" },
-      ],
     };
   },
-  computed: mapState(["user"]),
+  computed: mapState(["user", "users"]),
   methods: {
-    ...mapMutations(['clearData']),
+    ...mapMutations(["clearData"]),
     exit() {
-      this.$router.push('/?message=leftChat')
-      this.clearData();
+      this.$socket.emit("userLeft", this.user.id, () => {
+        this.$router.push("/?message=leftChat");
+        this.clearData();
+      });
     },
   },
 };
 </script>
 <style scoped>
-  .content-wrapp-item {
-    height: 100%;
-  }
+.content-wrapp-item {
+  height: 100%;
+}
 </style>
