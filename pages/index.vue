@@ -2,6 +2,10 @@
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8>
       <v-card min-width="360">
+        <v-snackbar v-model="snackbar" :timeout="6000" top>
+          {{ message }}
+          <v-btn color="pink" flat @click="snackbar = false">Закрыть</v-btn>
+        </v-snackbar>
         <v-card-title><h2>Nuxt chatRoom</h2></v-card-title>
         <v-card-text v-on:keyup.enter="submit">
           <v-form ref="form" v-model="valid" lazy-validation>
@@ -28,7 +32,6 @@
             >
               Enter
             </v-btn>
-
             <v-btn color="warning" class="mr-4" @click="reset">
               Reset Form
             </v-btn>
@@ -48,6 +51,8 @@ export default {
     title: "Welcome to chatRoom",
   },
   data: () => ({
+    snackbar: false,
+    message: "",
     valid: true,
     name: "",
     nameRules: [
@@ -57,6 +62,15 @@ export default {
     room: "",
     roomRules: [(v) => !!v || "Room is required"],
   }),
+  mounted() {
+    const { message } = this.$route.query;
+    if (message === "no user") {
+      this.message = "Input Date";
+    } else if (message === "leftChat") {
+      this.message = "You left chatRoom";
+    }
+    this.snackbar = !!this.message;
+  },
   sockets: {
     connect: function () {
       console.log("socket connected");
@@ -64,7 +78,7 @@ export default {
   },
   methods: {
     enter() {
-      console.log('enter')
+      console.log("enter");
     },
     ...mapMutations(["setUser"]),
     submit() {
@@ -78,7 +92,7 @@ export default {
         if (typeof data === "string") {
           console.error(data);
         } else {
-          user.id = data.userId 
+          user.id = data.userId;
           this.setUser(user);
           this.$router.push("/chat");
         }
@@ -93,9 +107,10 @@ export default {
 </script>
 
 <style>
- ul,li {
-   padding: 0;
-   margin: 0;
-   list-style: none;
- }
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
 </style>
