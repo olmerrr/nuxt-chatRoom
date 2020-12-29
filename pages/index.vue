@@ -64,7 +64,7 @@ export default {
   }),
   mounted() {
     const { message } = this.$route.query;
-    if (message === "no user") {
+    if (message === 'noUserd') {
       this.message = "Input Date";
     } else if (message === "leftChat") {
       this.message = "You left chatRoom";
