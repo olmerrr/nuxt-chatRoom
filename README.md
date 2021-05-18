@@ -1,6 +1,6 @@
 # chat-nuxt
 used socket.io
-nuxt+vuex
+nuxt+vuex+vuetify
 
 ## Build Setup
 
