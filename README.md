@@ -1,6 +1,6 @@
 # chat-nuxt
-
-> My world-class Nuxt.js project
+used socket.io
+nuxt+vuex
 
 ## Build Setup
 
